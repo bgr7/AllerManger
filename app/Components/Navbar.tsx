@@ -14,7 +14,7 @@ const links = [
   { name: "Help", href: "/help" },
 ];
 
-async function getData(userId) {
+async function getData(userId: any) {
   const query = `*[_type == "user" && id == "${userId}"][0].role`;
   const data = await client.fetch(query);
   return data;

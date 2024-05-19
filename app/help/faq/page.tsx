@@ -9,10 +9,10 @@ function Page() {
   };
 
   return (
-    <div className=" absolute top-20 left-0 bg-white w-full p-4 flex flex-col items-center">
+    <div className="absolute top-20 left-0 bg-white w-full p-4 flex flex-col items-center">
       <div className="flex flex-col items-center gap-4 max-w-[600px]">
         <h1 className="text-2xl font-bold">Frequently Asked Questions About the Application</h1>
-        
+
         <ul className="list-disc pl-5 space-y-2">
           <li>
             <strong>1. What is the purpose of this application?</strong>
@@ -52,7 +52,7 @@ function Page() {
           </li>
           <li>
             <strong>8. How is user feedback collected and evaluated?</strong>
-            <p>We value user feedback and actively collect it through various channels such as in-app feedback forms, surveys, and user reviews. Feedback is carefully analyzed and used to improve the application's features and usability.</p>
+            <p>We value user feedback and actively collect it through various channels such as in-app feedback forms, surveys, and user reviews. Feedback is carefully analyzed and used to improve the application&apos;s features and usability.</p>
           </li>
         </ul>
 

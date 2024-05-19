@@ -68,7 +68,7 @@ export default function RegisterPage() {
         setProducts(productData)
 
         setLoading(false)
-      } catch (error) {
+      } catch (error: any) {
         setError(error.message)
         setLoading(false)
       }

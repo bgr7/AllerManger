@@ -38,42 +38,43 @@ export default function EditUserPage() {
     const fetchData = async () => {
       try {
         // Fetch user data
-        const userResponse = await fetch(`/api/getUser/${clerkUser?.id}`)
+        const userResponse = await fetch(`/api/getUser/${clerkUser?.id}`);
         if (!userResponse.ok) {
-          throw new Error("Failed to fetch user data")
+          throw new Error("Failed to fetch user data");
         }
 
-        const userData = await userResponse.json()
-        setUser(userData)
-        console.log("User Data: ", userData)
+        const userData = await userResponse.json();
+        setUser(userData);
+        console.log("User Data: ", userData);
 
         // Fetch allergy data
-        const allergyResponse = await fetch(`/api/getAllergies`)
+        const allergyResponse = await fetch(`/api/getAllergies`);
         if (!allergyResponse.ok) {
-          throw new Error("Failed to fetch allergy data")
+          throw new Error("Failed to fetch allergy data");
         }
-        const allergyData = await allergyResponse.json()
-        setAllergies(allergyData)
+        const allergyData = await allergyResponse.json();
+        setAllergies(allergyData);
 
         // Fetch product data
-        const productResponse = await fetch(`/api/getProducts`)
+        const productResponse = await fetch(`/api/getProducts`);
         if (!productResponse.ok) {
-          throw new Error("Failed to fetch product data")
+          throw new Error("Failed to fetch product data");
         }
-        const productData = await productResponse.json()
-        setProducts(productData)
+        const productData = await productResponse.json();
+        setProducts(productData);
 
-        setLoading(false)
-      } catch (error) {
-        setError(error.message)
-        setLoading(false)
+        setLoading(false);
+      } catch (error: any) {
+        setError(error.message);
+        setLoading(false);
       }
-    }
+    };
 
     if (clerkUser) {
-      fetchData()
+      fetchData();
     }
   }, [clerkUser])
+
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -133,7 +134,7 @@ export default function EditUserPage() {
         } else {
           throw new Error(data.message)
         }
-      } catch (error) {
+      } catch (error: any) {
         setError(error.message)
       }
     }

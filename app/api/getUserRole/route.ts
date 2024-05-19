@@ -3,8 +3,14 @@ import { client } from "../../lib/sanity"
 
 export async function GET(
   request: Request,
-  { params }: { params: { userId: string } }
+  context: { params?: { userId?: string } }
 ) {
+  const { params } = context
+
+  if (!params?.userId) {
+    return NextResponse.json({ message: "UserId is required" }, { status: 400 })
+  }
+
   const { userId } = params
 
   try {

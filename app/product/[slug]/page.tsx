@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { fullProduct } from "@/app/interface";
 import { client, urlFor } from "@/app/lib/sanity";
@@ -9,7 +9,19 @@ import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-const getRecommendedProducts = async (userId) => {
+// Define the interface for ProductData
+interface ProductData {
+  _id: string;
+  images: { asset: { _ref: string } }[];
+  code: string;
+  name: string;
+  description: string;
+  category: { _id: string; name: string };
+  slug: { current: string };
+  allergies: { name: string }[];
+}
+
+const getRecommendedProducts = async (userId: any) => {
   const query = `
   *[_type == "product" && 
   !(_id in *[_type == "user" && id == "${userId}"][0].allergies[].affectedProducts[]._ref) &&
@@ -20,7 +32,7 @@ const getRecommendedProducts = async (userId) => {
   return data;
 }
 
-const fetchAllergiesData = async (slug, userId) => {
+const fetchAllergiesData = async (slug: any, userId: any) => {
   const query = `
     {
       "product": *[_type == "product" && code == "${slug}"][0] {
@@ -56,7 +68,7 @@ const fetchAllergiesData = async (slug, userId) => {
   return await client.fetch(query, { slug, userId });
 };
 
-const fetchDislikedIngredientsData = async (slug, userId) => {
+const fetchDislikedIngredientsData = async (slug: any, userId: any) => {
   const query = `
     {
       "product": *[_type == "product" && code == "${slug}"][0] {
@@ -92,10 +104,10 @@ const fetchDislikedIngredientsData = async (slug, userId) => {
 
 export const dynamic = "force-dynamic";
 
-export default function ProductPage({ params }) {
+export default function ProductPage({ params }: any) {
   const { user: userClerk } = useUser();
-  const [recProduct, setRecProduct] = useState([]);
-  const [productData, setProductData] = useState(null);
+  const [recProduct, setRecProduct] = useState<ProductData[]>([]);
+  const [productData, setProductData] = useState<ProductData | null>(null);
   const [isProductInAllergies, setIsProductInAllergies] = useState(false);
   const [isProductInDislikedIngredients, setIsProductInDislikedIngredients] = useState(false);
 
@@ -112,10 +124,10 @@ export default function ProductPage({ params }) {
 
         setProductData(product);
 
-        const productInAllergies = allergiesUser.allergies.some(allergy =>
-          allergy.affectedProducts.some(p => p._id === product._id)
+        const productInAllergies = allergiesUser.allergies.some((allergy: any) =>
+          allergy.affectedProducts.some((p: any) => p._id === product._id)
         );
-        const productInDislikedIngredients = dislikedUser.favoriteProducts.some(p => p._id === product._id);
+        const productInDislikedIngredients = dislikedUser.favoriteProducts.some((p: any) => p._id === product._id);
 
         setIsProductInAllergies(productInAllergies);
         setIsProductInDislikedIngredients(productInDislikedIngredients);
@@ -210,7 +222,7 @@ export default function ProductPage({ params }) {
                 width={200}
                 height={200}
                 alt={recProduct.name}
-                className="object-center object-contain cursor-pointer w-full h-full"              />
+                className="object-center object-contain cursor-pointer w-full h-full" />
               <h3 className="text-md font-semibold text-gray-800 mt-2">
                 {recProduct.name}
               </h3>
