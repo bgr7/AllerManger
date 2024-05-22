@@ -22,7 +22,7 @@ export default function SearchBar() {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter Barcode Number..."
+          placeholder="Search Barcode No."
           className="border border-gray-300 rounded-lg p-2 mr-3 w-full"
         />
         <button
